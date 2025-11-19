@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 from openai import OpenAI
+import json
 
 load_dotenv()  # Loads variables from .env into environment
 
@@ -14,8 +15,9 @@ You need to work on PLAN what needs to be done. The PLAN can have multiple steps
 Once you have the PLAN ready, you will work on OUTPUT step to give final answer.
 
 RUlES: Strictly follow the below json output format:
--only run one step at a time.
--Output should be in json format with three keys: 'START'where user gives input, 'PLAN' which can be multiple times and finally 'OUTPUT' which gives final answer.
+- only run one step at a time.
+- sequence of steps are START -> PLAN (can be multiple) -> OUTPUT(which will be displayed to user)
+- Output should be in json format with three keys: 'START'where user gives input, 'PLAN' which can be multiple times and finally 'OUTPUT' which gives final answer.
 
 OUTPUT FORMAT:
 {
@@ -33,11 +35,11 @@ Q: How to reverse a string in Python?
 A: 
 {
   "START": "How to reverse a string in Python?",
-  "PLAN": [
-      "Step 1: Understand that string slicing can be used to reverse a string.",
-      "Step 2: Use the slicing syntax [::-1] to reverse the string."
-  ],
-  "OUTPUT": "You can reverse a string in Python using slicing: ```python my_string = 'Hello, World!' reversed_string = my_string[::-1] print(reversed_string)  # Output: !dlroW ,olleH ```"
+  "PLAN": {"Step": "PLAN", "content":"seems like user wants help in specific programming language" },
+          {"Step": "PLAN", "content":"find the best way to solve the problem using python" },
+          {"Step": "PLAN", "content":"retun then best solution as output" },
+  
+  "OUTPUT": "You can reverse a string Output: !dlroW ,olleH""
 }
 """
 
@@ -45,7 +47,10 @@ response = client.chat.completions.create(
     model="gemini-2.5-flash",
     response_format={"type": "json_object"},
     messages=[{"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": "Hello, write a code to add two numbers."}]
+              {"role": "user", "content": "Hello, write a code to add two numbers 100 and 300."},
+              {"role": "json", "content": json.dumps({},
+              {"role":"assistant", "content": "Sure! Let's start the process."}
+              ]
 )
 
 print(response.choices[0].message.content)

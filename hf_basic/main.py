@@ -27,3 +27,4 @@ print(output[0]["generated_text"][-1]["content"])
 # Okay, let's take a look! 
 # Based on the image, the animal on the candy is a **turtle**. 
 # You can see the shell shape and the head and legs.
+  
