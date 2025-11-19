@@ -1,2 +1,8 @@
 hello_world/.env
 .env
+agent/__pycache__/agent.cpython-313.pyc
+agent/__pycache__/agent.cpython-314.pyc
+agent/__pycache__/weather_tool.cpython-313.pyc
+agent/__pycache__/weather_tool.cpython-314.pyc
+.vscode/settings.json
+agent/.env.example

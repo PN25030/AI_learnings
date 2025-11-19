@@ -15,5 +15,7 @@ from dotenv import load_dotenv
 load_dotenv()
 client = openai.Client(api_key= os.getenv("OPENAI_API_KEY"))
 
-response = client.models.generate_content(model="gemini-2.5-flash-lite",Content="Hello AI. Dont be descriptive.")
+response = client.completions
+
+client.models.generate_content(model="gemini-2.5-flash-lite",Content="Hello AI. Dont be descriptive.")
 print(response)
